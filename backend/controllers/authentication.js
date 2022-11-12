@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
         message:'Could not find a user with the provided username and password'
     })
   } else {
-    req.session.userId =userId
+    req.session.userId =user.userId
     res.json({user})
   }
 })
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 router.get('/profile', async (req, res)=>{
   console.log(req.session.userId)
   try {
-    let user= await user.findOne({
+    let user= await User.findOne({
       where: {
         userId: user.session.userId
       }
