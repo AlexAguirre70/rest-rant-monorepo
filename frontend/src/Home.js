@@ -1,5 +1,7 @@
+import { useHistory } from "react-router";
 
 function Home() {
+  const history = useHistory()
   return (
     <main>
       <h1>HOME</h1>
@@ -9,8 +11,8 @@ function Home() {
           Photo by <a href="AUTHOR_LINK">Brenda Godinez</a> on <a href="UNSPLASH_LINK">Unsplash</a>
         </div>
       </div>
-      <a href="/places">
-        <button className="btn-primary">Places Page</button>
+      <a href="#" onClick={() => history.push("/places")}>
+        Places Page
       </a>
     </main>
   );

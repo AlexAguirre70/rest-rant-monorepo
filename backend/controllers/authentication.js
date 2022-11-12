@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     })
   } else {
     const result = await jwt.encode(process.env.JWT_SECRET,{id:user.userID})
-    res.json({user:user, token:result.value})
+       res.json({user:user, token:result.value})
   }
 })
 
@@ -23,7 +23,7 @@ router.get('/profile', async (req, res) => {
     try {
         // Split the authorization header into [ "Bearer", "TOKEN" ]:
         const [authenticationMethod, token] = req.headers.authorization.split(' ')
-
+        console.log(authenticationMethod,'this is the token' , token)
         // Only handle "Bearer" authorization for now 
         //  (we could add other authorization strategies later):
         if (authenticationMethod == 'Bearer') {
@@ -33,7 +33,6 @@ router.get('/profile', async (req, res) => {
 
             // Get the logged in user's id from the payload
             const { id } = result.value
-
             // Find the user object using their id:
             let user = await User.findOne({
                 where: {
