@@ -6,7 +6,8 @@ const cors = require('cors')
 const app = express();
 const cookieSession= require('cookie-session')
 
-// Express Settings
+// Express Settings for sessions
+
 app.use (cookieSession({
     name:'session',
     keys: [process.env.SESSION_SECRET],
