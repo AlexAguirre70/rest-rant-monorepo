@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect,useContext } from "react"
 import { useHistory, useParams } from "react-router"
+import { CurrentUser } from '../contexts/CurrentUser';
 
 function EditPlaceForm() {
 
@@ -14,7 +15,7 @@ function EditPlaceForm() {
 		state: '',
 		cuisines: ''
 	})
-
+	const {currentUser}=useContext(CurrentUser)
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(`http://localhost:5000/places/${placeId}`)
@@ -30,7 +31,8 @@ function EditPlaceForm() {
 		await fetch(`http://localhost:5000/places/${place.placeId}`, {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization' : `Bearer ${localStorage.getItem('token')}`
 			},
 			body: JSON.stringify(place)
 		})

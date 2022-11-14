@@ -12,7 +12,7 @@ function PlaceDetails() {
 	const history = useHistory()
 	const [place, setPlace] = useState(null)
 	const {currentUser}=useContext(CurrentUser)
-		console.log(currentUser)
+		
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(`http://localhost:5000/places/${placeId}`)
@@ -32,7 +32,11 @@ function PlaceDetails() {
 
 	async function deletePlace() {
 		await fetch(`http://localhost:5000/places/${place.placeId}`, {
-			method: 'DELETE'
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization' : `Bearer ${localStorage.getItem('token')}`
+			}
 		})
 		history.push('/places')
 	}
@@ -41,7 +45,7 @@ function PlaceDetails() {
 		await fetch(`http://localhost:5000/places/${place.placeId}/comments/${deletedComment.commentId}`, {
 			method: 'DELETE',
 			headers: {
-				'Content-Typee': 'application/json',
+				'Content-Type': 'application/json',
 				'Authorization' : `Bearer ${localStorage.getItem('token')}`
 			}
 		})
@@ -111,7 +115,7 @@ function PlaceDetails() {
 	if(currentUser?.role==='admin'){
 		placeActions =(
 			<div>
-			<a href={`/places/${place.placeId}/edit`} className="btn btn-warning" onClick={editPlace}>Edit</a>
+			<a href='#' className="btn btn-warning" onClick={editPlace}>Edit</a>
 			<button type='submit' className="btn btn-danger" onClick={deletePlace}>Delete</button>
 			</div>)
     }
