@@ -5,6 +5,7 @@ import NewCommentForm from "./NewCommentForm";
 import { CurrentUser } from '../contexts/CurrentUser';
 
 
+
 function PlaceDetails() {
 
 	const { placeId } = useParams()
