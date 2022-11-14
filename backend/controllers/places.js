@@ -48,6 +48,7 @@ router.get('/:placeId', async (req, res) => {
 })
 
 router.put('/:placeId', async (req, res) => {
+    console.log(req)
     if(req.currentUser?.role!=='admin'){
         return res.status(403).json({message:'You are not allowed to Edit a place'})
     }
@@ -69,6 +70,7 @@ router.put('/:placeId', async (req, res) => {
 })
 
 router.delete('/:placeId', async (req, res) => {
+    console.log(req.body)
     if(req.currentUser?.role!=='admin'){
         return res.status(403).json({message:'You are not allowed to Delete a place'})
     }
